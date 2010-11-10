@@ -1,0 +1,49 @@
+= test-mysqld
+
+see http://developer.cybozu.co.jp/kazuho/2009/08/perl-mysql-test.html
+
+  require 'pp'
+  require 'rubygems'
+  require 'test/mysqld'
+  mysqld = Test::Mysqld.new(:auto_start => true)
+  pp mysqld
+  pp mysqld.dsn
+  pp conn = Mysql2::Client.new(mysqld.dsn)
+  # >> #<Test::Mysqld:0x7fd4a9fd4000
+  # >>  @base_dir="/tmp/d20101110-13587-1aemfmq",
+  # >>  @mycnf=
+  # >>   {"datadir"=>"/tmp/d20101110-13587-1aemfmq/var",
+  # >>    "pid-file"=>"/tmp/d20101110-13587-1aemfmq/tmp/mysql.pid",
+  # >>    "socket"=>"/tmp/d20101110-13587-1aemfmq/tmp/mysql.sock"},
+  # >>  @mysql_install_db="/usr/bin/mysql_install_db",
+  # >>  @mysqld="/usr/sbin/mysqld",
+  # >>  @pid=13651>
+  # >> {:socket=>"/tmp/d20101110-13587-1aemfmq/tmp/mysql.sock",
+  # >>  :username=>"root",
+  # >>  :database=>"test"}
+  # >> #<Mysql2::Client:0x7fd4aa4f6830
+  # >>  @query_options=
+  # >>   {:database_timezone=>:local,
+  # >>    :as=>:hash,
+  # >>    :application_timezone=>nil,
+  # >>    :cache_rows=>true,
+  # >>    :async=>false,
+  # >>    :cast_booleans=>false,
+  # >>    :symbolize_keys=>false,
+  # >>    :connect_flags=>2147525125}>
+
+you need mysql2.gem or mysql.gem
+
+== Note on Patches/Pull Requests
+
+* Fork the project.
+* Make your feature addition or bug fix.
+* Add tests for it. This is important so I don't break it in a
+  future version unintentionally.
+* Commit, do not mess with rakefile, version, or history.
+  (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
+* Send me a pull request. Bonus points for topic branches.
+
+== Copyright
+
+Copyright (c) 2010 miyucy. See LICENSE for details.
