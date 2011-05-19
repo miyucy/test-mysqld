@@ -48,8 +48,8 @@ module Test
       File.open(base_dir + '/etc/my.cnf', 'wb') do |f|
         f.puts "[mysqld]"
         mycnf.each do |key, val|
-          if val.nil? or val.empty?
-            f.puts "#{val}"
+          if val.nil?
+            f.puts "#{key}"
           else
             f.puts "#{key}=#{val}"
           end
