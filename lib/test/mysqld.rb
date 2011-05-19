@@ -108,6 +108,7 @@ module Test
       @mycnf["socket"]   ||= base_dir + '/tmp/mysql.sock'
       @mycnf["datadir"]  ||= base_dir + '/var'
       @mycnf["pid-file"] ||= base_dir + '/tmp/mysql.pid'
+      @mycnf["port"]     ||= 13306
 
       @mysqld           = options[:mysqld] || find_mysqld
       @mysql_install_db = options[:mysql_install_db] || find_mysql_install_db
