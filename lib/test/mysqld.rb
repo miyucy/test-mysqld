@@ -29,12 +29,9 @@ module Test
 
     def dsn(options={})
       options.tap do |option|
-        options[:port] ||= mycnf["port"] if mycnf["port"]
-        if options[:port]
-          options[:host] ||= mycnf["bind-address"] || "127.0.0.1"
-        else
-          options[:socket] ||= mycnf["socket"]
-        end
+        options[:host]     ||= mycnf["bind-address"] if mycnf["bind-address"]
+        options[:port]     ||= mycnf["port"]
+        options[:socket]   ||= mycnf["socket"]
         options[:username] ||= "root"
         options[:database] ||= self.class.database
       end
