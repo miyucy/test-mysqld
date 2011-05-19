@@ -12,6 +12,14 @@ module Test
       @@auto_start = !!value
     end
 
+    def self.database
+      @@database ||= 'test'
+    end
+
+    def self.database=(database)
+      @@database = database
+    end
+
     def initialize(options={})
       parse_options options
       raise "mysqld is alread running (#{mycnf["pid-file"]})" if FileTest.exist? mycnf["pid-file"]
@@ -28,7 +36,7 @@ module Test
           options[:socket] ||= mycnf["socket"]
         end
         options[:username] ||= "root"
-        options[:database] ||= "test"
+        options[:database] ||= self.class.database
       end
     end
 
@@ -145,7 +153,7 @@ module Test
 
     def create_database
       connection = mysql2_or_mysql_connection
-      connection.query("CREATE DATABASE IF NOT EXISTS test")
+      connection.query("CREATE DATABASE IF NOT EXISTS #{connection.escape self.class.database}")
       connection.close
     end
 
@@ -178,7 +186,9 @@ module Test
       end
       if defined? ::Mysql
         opts = dsn :database => 'mysql'
-        Mysql.new(opts[:username], nil, opts[:host], opts[:port], opts[:database], opts[:socket], opts[:flags])
+        conn = Mysql.new(opts[:host], opts[:username], opts[:password], opts[:database], opts[:port], opts[:socket], opts[:flags])
+        def conn.escape(str); escape_string str; end
+        conn
       else
         nil
       end
