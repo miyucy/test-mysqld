@@ -4,14 +4,19 @@ require "tmpdir"
 
 module Test
   class Mysqld
+    def self.auto_start
+      @@auto_start ||= false
+    end
+
+    def self.auto_start=(value)
+      @@auto_start = !!value
+    end
+
     def initialize(options={})
       parse_options options
       raise "mysqld is alread running (#{mycnf["pid-file"]})" if FileTest.exist? mycnf["pid-file"]
-      if options[:auto_start]
-        setup
-        start
-      end
       setup
+      start if options[:auto_start] || self.class.auto_start
     end
 
     def dsn(options={})
