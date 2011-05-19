@@ -32,6 +32,10 @@ module Test
       end
     end
 
+    def mycnf_file
+      File.open(base_dir + '/etc/my.cnf', 'rb'){ |f| f.read }
+    end
+
     def setup
       File.open(base_dir + '/etc/my.cnf', 'wb') do |f|
         f.puts "[mysqld]"
