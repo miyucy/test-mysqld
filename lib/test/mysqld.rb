@@ -130,7 +130,8 @@ module Test
 
     def find_mysql_install_db
       suppress_logging
-      find_executable 'mysql_install_db'
+      exec_file_path = find_executable 'mysql_install_db'
+      File.expand_path(File.readlink(exec_file_path), File.dirname(exec_file_path))
     end
 
     def default_base_dir
