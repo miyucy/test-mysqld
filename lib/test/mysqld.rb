@@ -125,12 +125,17 @@ module Test
 
     def find_mysqld
       suppress_logging
-      find_executable 'mysqld'
+      exec_file_path = find_executable 'mysqld'
+
+      return exec_file_path unless File.symlink?(exec_file_path)
+      File.expand_path(File.readlink(exec_file_path), File.dirname(exec_file_path))
     end
 
     def find_mysql_install_db
       suppress_logging
       exec_file_path = find_executable 'mysql_install_db'
+
+      return exec_file_path unless File.symlink?(exec_file_path)
       File.expand_path(File.readlink(exec_file_path), File.dirname(exec_file_path))
     end
 
