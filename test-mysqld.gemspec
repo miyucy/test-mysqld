@@ -1,7 +1,7 @@
 # coding: utf-8
 Gem::Specification.new do |spec|
   spec.name          = "test-mysqld"
-  spec.version       = "0.0.1"
+  spec.version       = "0.0.2"
   spec.authors       = ["miyucy"]
   spec.email         = ["fistfvck@gmail.com"]
   spec.summary       = %q{port of Test::mysqld (mysqld runner for tests)}
