@@ -1,21 +1,14 @@
-## MAC OS
-.DS_Store
-
-## TEXTMATE
-*.tmproj
-tmtags
-
-## EMACS
-*~
-\#*
-.\#*
-
-## VIM
-*.swp
-
-## PROJECT::GENERAL
-coverage
-rdoc
-pkg
-
-## PROJECT::SPECIFIC
+/.bundle/
+/.yardoc
+/Gemfile.lock
+/_yardoc/
+/coverage/
+/doc/
+/pkg/
+/spec/reports/
+/tmp/
+*.bundle
+*.so
+*.o
+*.a
+mkmf.log
